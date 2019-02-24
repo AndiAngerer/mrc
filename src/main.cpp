@@ -1,4 +1,4 @@
-// #define EXAMPLES 1 //uncomment to use examples
+#define EXAMPLES 1 //uncomment to use examples
 #ifdef EXAMPLES
 
 // #include "../examples/Servos.h"
