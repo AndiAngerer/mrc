@@ -1,12 +1,12 @@
 #include "Arduino.h"
 
 // ---- Servos ---- on Teensy PWM pins are 3-6 9-10 20-21
-#define pin_servo_0 3
-#define pin_servo_1 4
-#define pin_servo_2 5
-#define pin_servo_3 6
-#define pin_servo_4 9
-#define pin_servo_5 10
+#define pin_servo_0 2
+#define pin_servo_1 3
+#define pin_servo_2 4
+#define pin_servo_3 5
+#define pin_servo_4 6
+#define pin_servo_5 7
 
 #define pin_additional_servo_6 20
 #define pin_additional_servo_7 -1
@@ -15,7 +15,7 @@
 // minAngle must be less than maxAngle. To flip the direction of rotation do:
 // {minFreq <-> maxFreq, minAngle * -1 <-> maxAngle * -1}
 const float servoConfig[6][7] = {
-{ pin_servo_0,  150*DEG_TO_RAD, 540.00, 2360.00, -100.57*DEG_TO_RAD, 80.57*DEG_TO_RAD, 0 },
+{ pin_servo_0,  150*DEG_TO_RAD, 550.00, 2380.00, -61.76*DEG_TO_RAD, 116.41*DEG_TO_RAD, 0 },
 { pin_servo_1,  150*DEG_TO_RAD, 1000.00, 2400.00, -80.22*DEG_TO_RAD, 55.57*DEG_TO_RAD, 0 },
 { pin_servo_2,  150*DEG_TO_RAD, 600.00, 2330.00, -25.57*DEG_TO_RAD, 60.41*DEG_TO_RAD, 0 },
 { pin_servo_3,  150*DEG_TO_RAD, 690.00, 2260.00, -134.57*DEG_TO_RAD, 90.31*DEG_TO_RAD, 0 },

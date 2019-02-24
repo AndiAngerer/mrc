@@ -42,7 +42,7 @@ float tmpServoConfig[6][6] = {
 };
 
 const float servoConfig[6][7] = {
-{ pin_servo_0,  150*DEG_TO_RAD, 540.00, 2360.00, -100.57*DEG_TO_RAD, 80.57*DEG_TO_RAD, 0 },
+{ pin_servo_0,  150*DEG_TO_RAD, 550.00, 2380.00, -61.76*DEG_TO_RAD, 116.41*DEG_TO_RAD, 0 },
 { pin_servo_1,  150*DEG_TO_RAD, 1000.00, 2400.00, -80.22*DEG_TO_RAD, 55.57*DEG_TO_RAD, 0 },
 { pin_servo_2,  150*DEG_TO_RAD, 600.00, 2330.00, -25.57*DEG_TO_RAD, 60.41*DEG_TO_RAD, 0 },
 { pin_servo_3,  150*DEG_TO_RAD, 690.00, 2260.00, -134.57*DEG_TO_RAD, 90.31*DEG_TO_RAD, 0 },
