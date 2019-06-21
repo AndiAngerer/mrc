@@ -5,14 +5,14 @@
 // use w: up, s: down, d: print, q: goto 0 angle, e,r,t,z:set min_max_angle_freq
 
 // ---- Servos ---- Teensy 3.2 PWM pins 3-6 9-10 20-23
-#define pin_servo_0 3
-#define pin_servo_1 4
-#define pin_servo_2 5
-#define pin_servo_3 6
-#define pin_servo_4 9
-#define pin_servo_5 10
-#define pin_servo_6 20
-#define pin_servo_7 21
+#define pin_servo_0 2
+#define pin_servo_1 3
+#define pin_servo_2 4
+#define pin_servo_3 5
+#define pin_servo_4 6
+#define pin_servo_5 7
+#define pin_servo_6 8
+#define pin_servo_7 9
 
 
 enum mode {
@@ -42,12 +42,12 @@ float tmpServoConfig[6][6] = {
 };
 
 const float servoConfig[6][7] = {
-    { pin_servo_0,  150 * DEG_TO_RAD,    852, 2091,    -90 * DEG_TO_RAD,     90 * DEG_TO_RAD, 0 },
-    { pin_servo_1,  150 * DEG_TO_RAD,    710, 1780,    -70 * DEG_TO_RAD,     90 * DEG_TO_RAD, 0 },
-    { pin_servo_2,  150 * DEG_TO_RAD,   2070,  600,    -90 * DEG_TO_RAD,    138 * DEG_TO_RAD, 0 },
-    { pin_servo_3,  150 * DEG_TO_RAD,    650, 2370,    -90 * DEG_TO_RAD,     75 * DEG_TO_RAD, 0 },
-    { pin_servo_4,  150 * DEG_TO_RAD,   2370,  860,   -127 * DEG_TO_RAD,     14 * DEG_TO_RAD, 0 },
-    { pin_servo_5,  150 * DEG_TO_RAD,   2290,  570,    -75 * DEG_TO_RAD,     86 * DEG_TO_RAD, 0 }
+    { pin_servo_0,  150*DEG_TO_RAD, 540.00, 2360.00, -100.57*DEG_TO_RAD, 80.57*DEG_TO_RAD, 0 },
+{ pin_servo_1,  150*DEG_TO_RAD, 1000.00, 2400.00, -80.22*DEG_TO_RAD, 55.57*DEG_TO_RAD, 0 },
+{ pin_servo_2,  150*DEG_TO_RAD, 600.00, 2330.00, -25.57*DEG_TO_RAD, 60.41*DEG_TO_RAD, 0 },
+{ pin_servo_3,  150*DEG_TO_RAD, 690.00, 2260.00, -134.57*DEG_TO_RAD, 90.31*DEG_TO_RAD, 0 },
+{ pin_servo_4,  150*DEG_TO_RAD, 2290.00, 570.00, -1.31*DEG_TO_RAD, 1.50*DEG_TO_RAD, 0 },
+{ pin_servo_5,  150*DEG_TO_RAD, 1766.00, 1966.00, -180.57*DEG_TO_RAD, 180.57*DEG_TO_RAD, 0 } 
 };
 
 
