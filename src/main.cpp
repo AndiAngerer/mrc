@@ -1,4 +1,4 @@
-#define EXAMPLES 1 //uncomment to use examples
+//#define EXAMPLES 1 //uncomment to use examples
 #ifdef EXAMPLES
 
 // #include "../examples/Servos.h"
@@ -6,8 +6,8 @@
 # include "../examples/CalibrateServos.h"
 #else // ifdef EXAMPLES
 
-// # include "../config/mp-robot-d.h"
-# include "../config/mp-robot-kit.h"
+# include "../config/mp-robot-d.h"
+//# include "../config/mp-robot-kit.h"
 # include <Arduino.h>
 # include "VarSpeedServo.h"
 # include "TimerOne.h"
@@ -72,7 +72,7 @@ Logger logger("main");
 void setup()
 {
     Serial.begin(9600);
-// Eepromstorage.clear();
+    //Eepromstorage.clear();
     // --- show start screen ---
     Display.begin();
     Display.clear();
@@ -165,7 +165,7 @@ void setup()
 }
 
 void onIncomingData(char c) {
-    // Serial.print(c); // send back received data
+    //Serial.print(c); // send back received data
     Mrcpparser->parseChar(c);
 }
 
