@@ -308,6 +308,8 @@ void RobotController::setTargetLogicalAngle(unsigned int index,
     this->targetAnglesChanged = true;
 
     this->state = PREPARE_MOVE;
+
+    logger.info("setTargetLogicalAngle index " + String(index) + " value " + String(targetAngle));
 }
 
 void RobotController::getTargetLogicalAngles(float targetAngles[]) {
@@ -353,6 +355,38 @@ float RobotController::getTargetPhysicalAngle(unsigned int index) {
 
 bool RobotController::isMoving() {
     return this->state != IDLE;
+}
+
+void RobotController::process2(int updateTimeInMs) {
+    switch(this->state) {
+        case IDLE:
+            break;
+        case PREPARE_MOVE:
+        {
+            logger.info("process2");
+            this->_Kinematic.forward(this->targetAngles[0],
+                                     this->targetAngles[1],
+                                     this->targetAngles[2],
+                                     this->targetAngles[3],
+                                     this->targetAngles[4],
+                                     this->targetAngles[5],
+                                     this->targetPose);
+
+            for (unsigned int j = 0; j < 6; j++) {
+                float targetRadAngle = this->getTargetLogicalAngle(j);
+
+                this->Servos[j]->setCurrentAngleVelocity(this->Servos[j]->getMaxAngleVelocity());
+
+                // std::cout << "set angle"<< tmpTargetAngles[j]<< '\n';
+                this->Servos[j]->setTargetRadAngle(targetRadAngle);
+            }
+
+            this->targetAnglesChanged = false;
+            this->targetPoseChanged   = false;
+
+            this->state = IDLE;            
+        }
+    }
 }
 
 void RobotController::process() {

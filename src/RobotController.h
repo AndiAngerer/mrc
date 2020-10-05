@@ -32,7 +32,7 @@ public:
         void(*_logicalToPhysicalAngles)(float[6]),
       void(*_physicalToLogicalAngles)(float[6]));
 
-    enum MOVEMENT_METHODS { LINEAR=1, P2P=0, CIRCULAR=2 };
+    enum MOVEMENT_METHODS { LINEAR=1, P2P=0, CIRCULAR=2, CYCLICJOINTPOSITION=3 };
     enum STATES { IDLE, MOVING, START_MOVE, PREPARE_MOVE };
     enum POSITION { X = 0, Y = 1, Z = 2, A = 3, B = 4, C = 5 };
 
@@ -87,6 +87,7 @@ public:
     MOCK_VIRTUAL bool  isMoving();
 
     void  process();
+    void process2(int updateTimeInMs);
 private:
   float startAngles[6]     = { 0 };
   float targetAngles[6]     = { 0 };

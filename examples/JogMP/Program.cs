@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace JogMP
 {
@@ -47,12 +50,14 @@ namespace JogMP
             using (var p = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One)) {
                 p.Open();
                 p.WriteLine(":S E XYZABC \r");
-                p.ReadLine();
                 string position = p.ReadLine();
-                
-                _pose = ParsePose(position);
 
+                _pose = ParsePose(position);
                 Console.WriteLine(_pose);
+
+                MoveJoints(p);
+                return;
+
 
                 Move(p, new Pose() {Z=1});
 
@@ -99,6 +104,37 @@ namespace JogMP
                 }
             }
             
+        }
+
+        private static void MoveJoints(SerialPort p)
+        {
+            int k = 0;
+
+            Task.Run(() => { k = Console.Read(); });
+
+            Stopwatch w = new Stopwatch();
+            while(k != 'x') {
+
+                w.Start();
+                p.WriteLine(":S E M03 R0 10 R1 0 R2 20 R3 -30 R4 0 R5 30 \r");
+                //p.ReadLine();
+                w.Stop();
+
+                Console.WriteLine($"Duration:{w.Elapsed}");
+
+                w.Reset();
+                Thread.Sleep(6);
+                
+                w.Start();
+                p.WriteLine(":S E M03 R0 12 R1 2 R2 20 R3 -28 R4 0 R5 30 \r");
+                //p.ReadLine();
+                w.Stop();
+
+                Console.WriteLine($"Duration:{w.Elapsed}");
+
+                w.Reset();
+                Thread.Sleep(6);
+            }
         }
 
         private static void Move(SerialPort p, Pose pose)

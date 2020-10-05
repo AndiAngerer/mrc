@@ -57,3 +57,6 @@ DartConfiguration.tcl
 *.out
 *.app
 /.vscode
+/.pio/build
+/examples/JogMP/.vs
+/examples/JogMP/obj

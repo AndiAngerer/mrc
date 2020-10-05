@@ -41,6 +41,7 @@ const  char MRIL_IS_MOVING    = 'K';
 const unsigned int MRIL_MOVEMENT_METHOD_P2P      = 0;
 const unsigned int MRIL_MOVEMENT_METHOD_LINEAR   = 1;
 const unsigned int MRIL_MOVEMENT_METHOD_CIRCULAR = 2;
+const unsigned int MRIL_MOVEMENT_METHOD_CYCLICJOINTPOSITION = 3;
 
 #ifndef MOCK_VIRTUAL // used for setting methods to virtual in test environment
 #define MOCK_VIRTUAL

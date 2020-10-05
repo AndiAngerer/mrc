@@ -44,7 +44,10 @@ void onIncomingData(char c);
 
 VarSpeedServo   *servos[8];
 Kinematic *Kin;
+
+#ifdef DISPLAY
 Display    Display;
+#endif
 
 MRILParser *Mrilparser;
 RobotController *RoboCon;
@@ -73,6 +76,8 @@ void setup()
 {
     Serial.begin(9600);
     //Eepromstorage.clear();
+    
+    #ifdef DISPLAY
     // --- show start screen ---
     Display.begin();
     Display.clear();
@@ -80,6 +85,7 @@ void setup()
     Display.displayRobotGeometry(geometry);
     Display.show();
     delay(1000);
+    #endif
 
     // --- init servos ---
 
@@ -110,24 +116,30 @@ void setup()
     // Kinematic
     Kin = new Kinematic(geometry);
 
+    #ifdef DISPLAY
     Display.displayText(0, 8 * 1, "KIN");
     Display.show();
+    #endif
+
     delay(100);
 
     // Robot Controller
     RoboCon = new RobotController(servos, *Kin, logicAngleLimits, logicalToPhysicalAngles, physicalToLogicalAngles); // todo make function
                                                                                                                      // optional
-
+    #ifdef DISPLAY
     Display.displayText(0, 8 * 2, "Con");
     Display.show();
     delay(100);
+    #endif
 
     // Additional Axis
     AxisController = new AdditionalAxisController(servos + 6);
 
+    #ifdef DISPLAY
     Display.displayText(0, 8 * 3, "Axis");
     Display.show();
     delay(100);
+    #endif
 
     // MRIL Parser
     Mrilparser = new MRILParser(*RoboCon,
@@ -135,18 +147,24 @@ void setup()
                                 *AxisController,
                                 WaitController,
                                 Mrcpr);
+    
+    #ifdef DISPLAY
     Display.displayText(40, 8 * 1, "MRIL");
     Display.show();
     delay(100);
+    #endif
 
     // MRCP Parser
     Mrcpparser = new MRCPParser(Eepromstorage,
                                 Ringbuffer,
                                 *Mrilparser,
                                 Mrcpr);
+    
+    #ifdef DISPLAY
     Display.displayText(40, 8 * 2, "MRCP");
     Display.show();
     delay(100);
+    #endif
 
     // link MRCP to incoming data
     Serialio.onData(onIncomingData);
@@ -197,7 +215,7 @@ void loop()
 
     logger.resetTime();
 
-    RoboCon->process();// should be part of ISR, but then the display is not working propery. I2C also requires an interrupt
+    RoboCon->process2(updateServosEveryMs);// should be part of ISR, but then the display is not working propery. I2C also requires an interrupt
     // status led
     // digitalWrite(pin_internal_led, HIGH);
     if (displayCounter++ >= 20000) {
@@ -208,7 +226,7 @@ void loop()
     // may want to put RoboCon->process in an interrupt based timer as well
     // drawing the display takes quite some time
 
-    RoboCon->process();
+    RoboCon->process2(updateServosEveryMs);
     Serialio.process();
     Mrilparser->process();
     Mrcpparser->process();
@@ -226,6 +244,7 @@ void loop()
 }
 
 void renderDisplay() {
+    #ifdef DISPLAY
     Display.clear();
     Display.displayRobot(Kin, RoboCon, 10, 20, 0.5, 1);
     Display.displayRobot(Kin, RoboCon, 35, 28, 0.5, 0);
@@ -291,6 +310,7 @@ void renderDisplay() {
         }
     }
     Display.show(); // takes 40 ms!
+    #endif
 }
 
 #endif // ifdef EXAMPLES

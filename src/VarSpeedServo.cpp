@@ -147,7 +147,7 @@ unsigned int VarSpeedServo::process(unsigned int deltaT) {
 
     float deltaAngle = this->currentAngleVelocity * this->elapsedTime / 1000.0;
 
-    // Serial.println(deltaAngle);
+    //Serial.println(deltaAngle);
 
     if (fabs(deltaAngle) > fabs(this->targetAngle - this->startAngle)) {
         this->currentAngle = this->targetAngle;

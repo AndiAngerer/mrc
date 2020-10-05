@@ -114,6 +114,11 @@ void MRILParser::parse(char mrilInstruction[], unsigned int length) {
                     case MRIL_MOVEMENT_METHOD_CIRCULAR:
                         _logger.warning("CIRCULAR not implemented");
                         break;
+                   
+                    case MRIL_MOVEMENT_METHOD_CYCLICJOINTPOSITION:
+                        _logger.warning("MRIL_MOVEMENT_METHOD_CYCLICJOINTPOSITION");
+                        this->_RobotController.setMovementMethod(RobotController::MOVEMENT_METHODS::CYCLICJOINTPOSITION);
+                        break;
                     }
                 }
                 break;
